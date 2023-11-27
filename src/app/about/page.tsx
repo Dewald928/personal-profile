@@ -50,7 +50,7 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'I’m Spencer Sharp. I live in New York City, where I design the future.',
+    'I’m Dewald Krynauw. I live in New York City, where I design the future.',
 }
 
 export default function About() {
@@ -69,58 +69,72 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            I’m Spencer Sharp. I live in New York City, where I design the
+            I'm Dewald Krynauw. I live in South Africa, where I build the
             future.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I’ve loved making things for as long as I can remember, and wrote
-              my first program when I was 6 years old, just two weeks after my
-              mom brought home the brand new Macintosh LC 550 that I taught
-              myself to type on.
+              I've loved making things for as long as I can remember, it started
+              with Lego, building spaceships robots and rockets. But that static
+              nature of Lego was not enough for me, I needed more action! That's
+              when I got my Lego Mindstorm kit (After ceaseless begging of
+              course). Inspired by Mythbusters and Battlebots I started building
+              robots, and I haven't stopped since.
             </p>
             <p>
-              The only thing I loved more than computers as a kid was space.
-              When I was 8, I climbed the 40-foot oak tree at the back of our
-              yard while wearing my older sister’s motorcycle helmet, counted
-              down from three, and jumped — hoping the tree was tall enough that
-              with just a bit of momentum I’d be able to get to orbit.
+              When I was 12, I build a robot that solves a Rubik's cube (I was
+              still faster than the robot though). I participated in the Siemens
+              Cyber Junkyard Challenge. Started learning how to code, and
+              program PLCs and microcontrollers. Got obsessed with Games and
+              Game development, and maybe got a minecraft addiction too. But
+              then I started looking up, and I saw the stars, and I knew I had
+              to go there.
             </p>
             <p>
-              I spent the next few summers indoors working on a rocket design,
-              while I recovered from the multiple surgeries it took to fix my
-              badly broken legs. It took nine iterations, but when I was 15 I
-              sent my dad’s Blackberry into orbit and was able to transmit a
-              photo back down to our family computer from space.
+              I started studying Computer and Electronics Engineering at
+              Potchefstroom University. Did my Masters in Deep Learning and AI,
+              specifically in the field of Solar Flare prediction. But then
+              everything changed when the CryptoKitties attacked.
             </p>
             <p>
-              Today, I’m the founder of Planetaria, where we’re working on
-              civilian space suits and manned shuttle kits you can assemble at
-              home so that the next generation of kids really <em>can</em> make
-              it to orbit — from the comfort of their own backyards.
+              Today, I'm a Software Engineer at Yknot Blockchain Solutions,
+              where I'm building the future of blockchain technology. We are
+              busy leveraging the power of blockchain to build a better future
+              for everyone.
             </p>
           </div>
         </div>
         <div className="lg:pl-20">
           <ul role="list">
-            <SocialLink href="#" icon={TwitterIcon}>
+            <SocialLink
+              href="https://twitter.com/FuZzyWaZzie"
+              icon={TwitterIcon}
+            >
               Follow on Twitter
             </SocialLink>
-            <SocialLink href="#" icon={InstagramIcon} className="mt-4">
+            {/* <SocialLink href="#" icon={InstagramIcon} className="mt-4">
               Follow on Instagram
-            </SocialLink>
-            <SocialLink href="#" icon={GitHubIcon} className="mt-4">
+            </SocialLink> */}
+            <SocialLink
+              href="https://github.com/Dewald928"
+              icon={GitHubIcon}
+              className="mt-4"
+            >
               Follow on GitHub
             </SocialLink>
-            <SocialLink href="#" icon={LinkedInIcon} className="mt-4">
+            <SocialLink
+              href="https://www.linkedin.com/in/dewald-k-6a080298/"
+              icon={LinkedInIcon}
+              className="mt-4"
+            >
               Follow on LinkedIn
             </SocialLink>
             <SocialLink
-              href="mailto:spencer@planetaria.tech"
+              href="mailto:dewald123@rocketmail.com"
               icon={MailIcon}
               className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
             >
-              spencer@planetaria.tech
+              dewald123@rocketmail.com
             </SocialLink>
           </ul>
         </div>

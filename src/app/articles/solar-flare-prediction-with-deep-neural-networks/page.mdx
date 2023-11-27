@@ -1,0 +1,60 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import magnetogram from './magnetogram.jpg'
+import wandb from './wandb.png'
+import PP_NOAA_12017_1 from './PP_NOAA_12017-1.png'
+
+export const article = {
+    author: 'Dewald Krynauw',
+    date: '2022-09-05',
+    title: 'Solar Flare Prediction with Deep Neural Networks',
+    description:
+        "A deep learning model that predicts solar flares, and why accuracy is not the most important metric.",
+}
+
+export const metadata = {
+    title: article.title,
+    description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+First let's look directly at the Sun. Mmm nice isn't it? (This is live, no need to go outside)
+
+|  | |
+|---|---|
+| <img src="https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_HMIBC.jpg" alt="HARPimage" width="300"/> | <img src="http://sdo.gsfc.nasa.gov/assets/img/latest/latest_512_0171.jpg" width="300"/> |
+
+---
+
+**Project description:** Three different deep learning architectures were trained and optimized to predict the likelihood 
+of a flare erupting from a sunspot, that is larger than a class M5.0, within the next 24 hours. 
+The architectures used are: MLP, TCN and LSTM.
+The [dataset](https://github.com/JasonTLWang/LSTM-flare-prediction) used is open source and compiled by Liu et al.
+The data contains image derived parameters called [SHARP](http://jsoc.stanford.edu/doc/data/hmi/sharp/sharp.htm), 
+which are physics-based equations obtained from the solar images.
+
+### 1. Obtaining the data
+Our own [data acquisition pipeline](https://github.com/Dewald928/DeepFlarePred/blob/master/Test_Scripts/data_aquisition_pipeline.ipynb) was developed
+to download the SHARP data. The SHARP data is derived from the magnetogram images (as shown).
+
+        <Image src={magnetogram} alt='' />
+
+### 2. Optimizing the models
+The different models were trained and optimized with the help of "[Weights and Biases](https://wandb.ai/home)". 
+After extensive experimenting we selected our best models to test on the "held-out" data.
+
+        <Image src={wandb} alt='' />
+
+### 3. Testing
+We tested for various metrics, most prominently the True Skill Statistic (TSS).
+Our models were investigated with multiple evaluation plots.
+
+        <Image src={PP_NOAA_12017_1} alt='' />
+
+### 4. Deployment
+As a proof of concept, we deployed our model in a near-realtime setting by using the MLP model.
+
+The model is live at: [https://flare-prediction.onrender.com/](https://flare-prediction.onrender.com/).
+
+Research is available at: [https://dspace.nwu.ac.za/handle/10394/37741](https://dspace.nwu.ac.za/handle/10394/37741).
