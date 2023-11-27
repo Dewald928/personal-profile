@@ -50,7 +50,7 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'I’m Dewald Krynauw. I live in New York City, where I design the future.',
+    "I'm Dewald Krynauw. I live in New York City, where I design the future.",
 }
 
 export default function About() {
@@ -69,23 +69,24 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
-            I'm Dewald Krynauw. I live in South Africa, where I build the
+            I&apos;m Dewald Krynauw. I live in South Africa, where I build the
             future.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I've loved making things for as long as I can remember, it started
-              with Lego, building spaceships robots and rockets. But that static
-              nature of Lego was not enough for me, I needed more action! That's
-              when I got my Lego Mindstorm kit (After ceaseless begging of
-              course). Inspired by Mythbusters and Battlebots I started building
-              robots, and I haven't stopped since.
+              I&apos;ve loved making things for as long as I can remember, it
+              started with Lego, building spaceships robots and rockets. But
+              that static nature of Lego was not enough for me, I needed more
+              action! That&apos;s when I got my Lego Mindstorm kit (After
+              ceaseless begging of course). Inspired by Mythbusters and
+              Battlebots I started building robots, and I haven&apos;t stopped
+              since.
             </p>
             <p>
-              When I was 12, I build a robot that solves a Rubik's cube (I was
-              still faster than the robot though). I participated in the Siemens
-              Cyber Junkyard Challenge. Started learning how to code, and
-              program PLCs and microcontrollers. Got obsessed with Games and
+              When I was 12, I build a robot that solves a Rubik&apos;s cube (I
+              was still faster than the robot though). I participated in the
+              Siemens Cyber Junkyard Challenge. Started learning how to code,
+              and program PLCs and microcontrollers. Got obsessed with Games and
               Game development, and maybe got a minecraft addiction too. But
               then I started looking up, and I saw the stars, and I knew I had
               to go there.
@@ -97,10 +98,10 @@ export default function About() {
               everything changed when the CryptoKitties attacked.
             </p>
             <p>
-              Today, I'm a Software Engineer at Yknot Blockchain Solutions,
-              where I'm building the future of blockchain technology. We are
-              busy leveraging the power of blockchain to build a better future
-              for everyone.
+              Today, I&apos;m a Software Engineer at Yknot Blockchain Solutions,
+              where I&apos;m building the future of blockchain technology. We
+              are busy leveraging the power of blockchain to build a better
+              future for everyone.
             </p>
           </div>
         </div>
