@@ -8,7 +8,8 @@ import '@/styles/tailwind.css'
 export const metadata: Metadata = {
   title: {
     template: '%s - Dewald Krynauw',
-    default: 'Dewald Krynauw - Software and Electronics Engineer, and Unicorn',
+    default:
+      'Dewald Krynauw - Software and Electronics Engineer, and Unicorn 🦄',
   },
   description:
     "I'm Dewald, a software engineer based in South Africa. I'm Chief Information Officer of Yknot Blockchain Solutions. Our focus is bringing blockchain technology to the masses. Building real-world solutions for real-world problems.",
