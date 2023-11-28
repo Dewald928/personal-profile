@@ -47,46 +47,42 @@ export default function Uses() {
     >
       <div className="space-y-20">
         <ToolsSection title="Workstation">
-          <Tool title="16” MacBook Pro, M1 Max, 64GB RAM (2021)">
-            I was using an Intel-based 16” MacBook Pro prior to this and the
-            difference is night and day. I’ve never heard the fans turn on a
-            single time, even under the incredibly heavy loads I put it through
-            with our various launch simulations.
+          <Tool title="Gaming PC">
+            A beefy Ryzen 9, 32GB of RAM, and an RTX 3070. For all those
+            bazillion docker containers and browser tabs I have open at any
+            given time. Also, minecraft.
           </Tool>
-          <Tool title="Apple Pro Display XDR (Standard Glass)">
-            The only display on the market if you want something HiDPI and
-            bigger than 27”. When you’re working at planetary scale, every pixel
-            you can get counts.
+          <Tool title="MacBook Air M1">
+            I prefer a superior operating system but sometimes you need to run
+            travel and need a battery that lasts longer than 5 seconds.
           </Tool>
-          <Tool title="IBM Model M SSK Industrial Keyboard">
-            They don’t make keyboards the way they used to. I buy these any time
-            I see them go up for sale and keep them in storage in case I need
-            parts or need to retire my main.
+          <Tool title="Qnap NAS">
+            I have too many things to store and I don&apos;t trust the cloud. So
+            I mirror everything to a NAS.
           </Tool>
-          <Tool title="Apple Magic Trackpad">
-            Something about all the gestures makes me feel like a wizard with
-            special powers. I really like feeling like a wizard with special
-            powers.
+          <Tool title="Keychron K4 Keyboard">
+            For those who want to go mechanical but don&apos;t want to wake up
+            the neighbours with the clickety-clack.
           </Tool>
-          <Tool title="Herman Miller Aeron Chair">
+          <Tool title="Logitech Master 2S">
+            How do people work without an infinite scroll wheel?
+          </Tool>
+          <Tool title="Ergonomic Merry Fair Chair">
             If I’m going to slouch in the worst ergonomic position imaginable
             all day, I might as well do it in an expensive chair.
           </Tool>
+          <Tool title="Equip electronic standing desk">
+            For taking breaks from slouching
+          </Tool>
         </ToolsSection>
         <ToolsSection title="Development tools">
-          <Tool title="Sublime Text 4">
-            I don’t care if it’s missing all of the fancy IDE features everyone
-            else relies on, Sublime Text is still the best text editor ever
-            made.
+          <Tool title="VS code">With way too many extensions.</Tool>
+          <Tool title="Docker">
+            For running all the things without polluting my machine.
           </Tool>
-          <Tool title="iTerm2">
-            I’m honestly not even sure what features I get with this that aren’t
-            just part of the macOS Terminal but it’s what I use.
-          </Tool>
-          <Tool title="TablePlus">
-            Great software for working with databases. Has saved me from
-            building about a thousand admin interfaces for my various projects
-            over the years.
+          <Tool title="Postman">For testing APIs and documenting them.</Tool>
+          <Tool title="ChatGPT and Github Copilot">
+            For writing all my code for me.
           </Tool>
         </ToolsSection>
         <ToolsSection title="Design">
@@ -97,24 +93,12 @@ export default function Uses() {
           </Tool>
         </ToolsSection>
         <ToolsSection title="Productivity">
-          <Tool title="Alfred">
-            It’s not the newest kid on the block but it’s still the fastest. The
-            Sublime Text of the application launcher world.
+          <Tool title="Notion">
+            Personal note taking, second brain and life organiser.
           </Tool>
-          <Tool title="Reflect">
-            Using a daily notes system instead of trying to keep things
-            organized by topics has been super powerful for me. And with
-            Reflect, it’s still easy for me to keep all of that stuff
-            discoverable by topic even though all of my writing happens in the
-            daily note.
-          </Tool>
-          <Tool title="SavvyCal">
-            Great tool for scheduling meetings while protecting my calendar and
-            making sure I still have lots of time for deep work during the week.
-          </Tool>
-          <Tool title="Focus">
-            Simple tool for blocking distracting websites when I need to just do
-            the work and get some momentum going.
+          <Tool title="Jira and Confluence">
+            Managing the development and documentation of a product with teams
+            of developers.
           </Tool>
         </ToolsSection>
       </div>

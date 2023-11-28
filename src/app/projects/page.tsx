@@ -7,43 +7,80 @@ import logoAnimaginary from '@/images/logos/animaginary.svg'
 import logoCosmos from '@/images/logos/cosmos.svg'
 import logoHelioStream from '@/images/logos/helio-stream.svg'
 import logoOpenShuttle from '@/images/logos/open-shuttle.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
+import logoFuelSwitch from '@/images/logos/FS.svg'
+import logoLitigated from '@/images/logos/litigated.png'
+import logoTelosEvm from '@/images/logos/evm.webp'
+import logoTswaps from '@/images/logos/tswaps.png'
+import logoTstarter from '@/images/logos/tstarter.svg'
+import logoTelosWallet from '@/images/logos/teloswallet.png'
+import logoTeloscan from '@/images/logos/teloscan.png'
+import logoNfdb from '@/images/logos/nfdb.svg'
+import logoSerum from '@/images/logos/serum.webp'
 
 const projects = [
   {
-    name: 'Planetaria',
+    name: 'Fuel Switch',
     description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-    logo: logoPlanetaria,
+      'Renewable Energy Certificates (RECs) Marketplace on the Telos Blockchain.',
+    link: { href: 'https://fuelswitch.io/', label: 'fuelswitch.io' },
+    logo: logoFuelSwitch,
   },
   {
-    name: 'Animaginary',
+    name: 'Litigated',
     description:
-      'High performance web animation library, hand-written in optimized WASM.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoAnimaginary,
+      'Crowdfunding platform for legal cases with return on investment.',
+    link: { href: 'https://litigated.com', label: 'litigated.com' },
+    logo: logoLitigated,
   },
   {
-    name: 'HelioStream',
+    name: 'Telos EVM',
     description:
-      'Real-time video streaming library, optimized for interstellar transmission.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoHelioStream,
+      "The world's fastest Ethereum Virtual Machine built on the Telos blockchain.",
+    link: {
+      href: 'https://www.telos.net/getting-started-with-evm',
+      label: 'telos.net',
+    },
+    logo: logoTelosEvm,
   },
   {
-    name: 'cosmOS',
-    description:
-      'The operating system that powers our Planetaria space shuttles.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoCosmos,
+    name: 'T-swaps',
+    description: 'Liquidity swap pools for the Telos blockchain.',
+    link: { href: 'https://tswaps.com/', label: 'tswaps.com' },
+    logo: logoTswaps,
   },
   {
-    name: 'OpenShuttle',
+    name: 'T-Starter',
+    description: 'Token ICO launchpad for the Telos blockchain.',
+    link: { href: 'https://app.tstarter.io/telos', label: 'tstarter.io' },
+    logo: logoTstarter,
+  },
+  {
+    name: 'Telos Wallet',
+    description: 'Official Telos wallet for the Telos blockchain.',
+    link: { href: 'https://wallet.telos.net', label: 'wallet.telos.net' },
+    logo: logoTelosWallet,
+  },
+  {
+    name: 'Teloscan',
+    description: 'Telos EVM block explorer for the Telos blockchain.',
+    link: {
+      href: 'https://www.teloscan.io/',
+      label: 'teloscan.io',
+    },
+    logo: logoTeloscan,
+  },
+  {
+    name: 'NFDb',
+    description: 'The Internet Database of Non-Fungible Tokens (NFTs)',
+    link: { href: 'https://www.nfdb.io/', label: 'nfdb.io' },
+    logo: logoNfdb,
+  },
+  {
+    name: 'Drinkserum',
     description:
-      'The schematics for the first rocket I designed that successfully made it to orbit.',
-    link: { href: '#', label: 'github.com' },
-    logo: logoOpenShuttle,
+      'Blurring the lines between the metaverse and real life. Serum ecosystem that brings real-world assets to the blockchain starting with energy drinks',
+    link: { href: 'https://www.drinkserum.com/', label: 'drinkserum.com' },
+    logo: logoSerum,
   },
 ]
 
@@ -67,7 +104,7 @@ export default function Projects() {
   return (
     <SimpleLayout
       title="Things I’ve made trying to put my dent in the universe."
-      intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Many of them are open-source, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
+      intro="I’ve worked on tons of little projects over the years but these are the ones that I’m most proud of. Some open-source, some I'm not allow to tell you, so if you see something that piques your interest, check out the code and contribute if you have ideas for how it can be improved."
     >
       <ul
         role="list"

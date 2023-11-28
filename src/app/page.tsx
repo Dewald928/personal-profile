@@ -189,7 +189,7 @@ function Role({ role }: { role: Role }) {
 function Resume() {
   let resume: Array<Role> = [
     {
-      company: 'Planetaria',
+      company: 'Yknot Blockchain Solutions',
       title: 'Chief Information Officer',
       logo: logoYknot,
       start: '2021',
