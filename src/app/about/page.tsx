@@ -104,6 +104,31 @@ export default function About() {
               future for everyone.
             </p>
           </div>
+          <div className="mt-6">
+            <h2>Skills</h2>
+            <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+              <p>
+                I&apos;m a full-stack developer, with a focus on blockchain
+                development. I&apos;ve worked with a wide range of technologies
+                and languages, and I&apos;m always looking to learn more.
+              </p>
+              <p>I&apos;m currently working with the following technologies:</p>
+              <ul className="list-inside list-disc">
+                <li>DevOps and Cloud</li>
+                <li>React</li>
+                <li>Vue</li>
+                <li>Next.js</li>
+                <li>Typescript</li>
+                <li>Node.js</li>
+                <li>MySQL & MongoDb</li>
+                <li>Solidity</li>
+                <li>C & C++</li>
+                <li>Python</li>
+                <li>Excel</li>
+                <li>Linux</li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div className="lg:pl-20">
           <ul role="list">
@@ -130,13 +155,13 @@ export default function About() {
             >
               Follow on LinkedIn
             </SocialLink>
-            <SocialLink
+            {/* <SocialLink
               href="mailto:dewald123@rocketmail.com"
               icon={MailIcon}
               className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
             >
               dewald123@rocketmail.com
-            </SocialLink>
+            </SocialLink> */}
           </ul>
         </div>
       </div>
