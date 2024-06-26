@@ -1,0 +1,69 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import sentry from './sentry.png'
+import design from './design.png'
+import setup from './setup.png'
+
+export const article = {
+    author: 'Dewald Krynauw',
+    date: '2018-12-08',
+    title: 'Raspberry Pi Paintball Sentry Turret',
+    description:
+        "An autonomous paintball sentry turret that can track and shoot at moving targets. It's powered by a Raspberry Pi and uses computer vision to detect and track targets.",
+
+}
+
+export const metadata = {
+    title: article.title,
+    description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+For getting those peksy burglars off your property in a semi-harmless fashion
+
+<Image src={sentry} alt='Sentry Turret'/>
+
+---
+
+**Project description:** The Autonomous Paint-ball Sentry Turret is a legal defence system that can efficiently remove intruders from the owner’s property.
+The system uses motion detection and tracking algorithms to locate
+moving targets, and fires either autonomously or manually. An effective motion detection system has been developed using Python
+along with OpenCV on a Raspberry Pi 3 Single Board Computer
+that controls three servo motors (pan, tilt, trigger). Motion tracking
+was implemented using the periodic background estimation subtraction algorithm
+
+Code and Full report available at: [https://github.com/Dewald928/PiSentryTurret](https://github.com/Dewald928/PiSentryTurret).
+
+### 1. Design
+
+A lot of the research and design is based on [Project Sentry Gun](https://github.com/sentryGun53/Project-Sentry-Gun)
+I replicated the mechanical design and reconfigured the system to work with a raspberry pi such that it can be used as a standalone system.
+
+<Image src={design} alt='Design' />
+
+### 2. Implementation
+I put together the hardware and the software to create a working prototype. The system uses a Raspberry Pi 3, a webcam, and three servo motors to control the turret.
+
+<Image src={setup} alt='Setup' />
+
+### 3. Testing
+Now... to find willing subjects.
+I started with rolling a car tyre to track it's speed and accuracy. But I needed more!
+So I got a friend to run around the yard while I tested the system. After we've acquired sufficient bruises from the piantball we could make our conclusion.
+
+You can view the whole development process on [Youtube](https://www.youtube.com/watch?v=VODCwwYDZKg&t=373s&ab_channel=DewaldKrynauw)
+
+### 4. Conclusions
+The turret was able to track and shoot targets, but not without flaws.
+Many of the mechanical failures were due to unprecise tolerances that caused gear slipping, which threw out the calibration.
+The software was good at tracking, but can be improved with higher quality cameras and more advanced tracking algorithms.
+
+Is this practical? For it to be, it will need to be always-on and reliable.
+Here are some of the downfalls of a system like this: 
+- Ammo - You're going to run out of it. A better hopper system is required, if you're going for that ultra rapid fire.
+- Maintenance - The system needs to be checked if it still has CO2 or air in the canister. So more sensors and checking required.
+- Power - The system needs to be powered on all the time. So you're going to need a UPS or a solar panel.
+- Range - The further the target, the less accurate.
+
+
