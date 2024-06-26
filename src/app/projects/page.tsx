@@ -16,6 +16,8 @@ import logoTelosWallet from '@/images/logos/teloswallet.png'
 import logoTeloscan from '@/images/logos/teloscan.png'
 import logoNfdb from '@/images/logos/nfdb.svg'
 import logoSerum from '@/images/logos/serum.webp'
+import logoMutatoads from '@/images/logos/mutatoads.png'
+import logoFlysafair from '@/images/logos/flysafair.svg'
 
 const projects = [
   {
@@ -24,6 +26,25 @@ const projects = [
       'Renewable Energy Certificates (RECs) Marketplace on the Telos Blockchain.',
     link: { href: 'https://fuelswitch.io/', label: 'fuelswitch.io' },
     logo: logoFuelSwitch,
+  },
+  {
+    name: 'Mutatoads',
+    description:
+      'A class of highly caffeinated mutant toads on the Solana blockchain.',
+    link: {
+      href: 'https://www.mutatoads.com/',
+      label: 'mutatoads.com',
+    },
+    logo: logoMutatoads,
+  },
+  {
+    name: 'Flymore FlySafair',
+    description: 'A secret project for FlySafair.',
+    link: {
+      href: 'https://flymore.flysafair.co.za/',
+      label: 'flymore.flysafair.co.za',
+    },
+    logo: logoFlysafair,
   },
   {
     name: 'Litigated',
