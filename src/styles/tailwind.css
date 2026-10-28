@@ -20,3 +20,79 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 }
+
+/* Interactive effects. Only visible with a mouse; see components/Interactions.tsx */
+
+@utility spotlight {
+  background-image: radial-gradient(
+    circle,
+    --alpha(var(--color-teal-500) / 6%),
+    transparent 65%
+  );
+
+  @variant dark {
+    background-image: radial-gradient(
+      circle,
+      --alpha(var(--color-teal-400) / 7%),
+      transparent 65%
+    );
+  }
+}
+
+/* Card hover background lit from the cursor (--mx/--my set by Interactions) */
+@utility glow-bg {
+  background-image: radial-gradient(
+    320px circle at var(--mx, -999px) var(--my, -999px),
+    --alpha(var(--color-teal-500) / 7%),
+    transparent 70%
+  );
+
+  @variant dark {
+    background-image: radial-gradient(
+      320px circle at var(--mx, -999px) var(--my, -999px),
+      --alpha(var(--color-teal-400) / 8%),
+      transparent 70%
+    );
+  }
+}
+
+/* Border that lights up near the cursor, drawn over the existing border */
+@utility glow-border {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(
+      240px circle at var(--mx, -999px) var(--my, -999px),
+      --alpha(var(--color-teal-500) / 70%),
+      transparent 80%
+    );
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+}
+
+/* Drift up into place on scroll, using native scroll-driven animations */
+@utility settle-in {
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: settle-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+@keyframes settle-in {
+  from {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+}
