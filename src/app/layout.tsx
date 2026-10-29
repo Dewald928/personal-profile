@@ -12,7 +12,7 @@ export const metadata: Metadata = {
       'Dewald Krynauw - Software and Electronics Engineer, and Unicorn 🦄',
   },
   description:
-    "I'm Dewald, a software engineer based in South Africa. I'm Chief Information Officer of Yknot Blockchain Solutions. Our focus is bringing blockchain technology to the masses. Building real-world solutions for real-world problems.",
+    "I'm Dewald, a software engineer based in South Africa. I'm Chief Information Officer of Yknot. Our focus is bringing blockchain technology to the masses. Building real-world solutions for real-world problems.",
   alternates: {
     types: {
       'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,

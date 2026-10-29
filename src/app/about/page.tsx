@@ -68,7 +68,7 @@ export default function About() {
           </div>
         </div>
         <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
             I&apos;m Dewald Krynauw. I live in South Africa, where I build the
             future.
           </h1>
@@ -98,10 +98,10 @@ export default function About() {
               everything changed when the CryptoKitties attacked.
             </p>
             <p>
-              Today, I&apos;m a Software Engineer at Yknot Blockchain Solutions,
-              where I&apos;m building the future of blockchain technology. We
-              are busy leveraging the power of blockchain to build a better
-              future for everyone.
+              Today, I&apos;m a Software Engineer at Yknot, where I&apos;m
+              building the future of blockchain technology. We are busy
+              leveraging the power of blockchain to build a better future for
+              everyone.
             </p>
           </div>
           <div className="mt-6">
