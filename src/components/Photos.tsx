@@ -44,6 +44,7 @@ function Photo({
     if (!interactive) return
 
     function onMove(event: PointerEvent) {
+      if (event.pointerType !== 'mouse') return
       let box = ref.current!.getBoundingClientRect()
       let dx = event.clientX - (box.left + box.width / 2)
       let dy = event.clientY - (box.top + box.height / 2)
@@ -94,7 +95,7 @@ function Photo({
         style={{ x, y, rotate: r, rotateX, rotateY, transformPerspective: 900 }}
         whileHover={{ scale: 1.05 }}
         onPointerMove={(event) => {
-          if (!interactive) return
+          if (!interactive || event.pointerType !== 'mouse') return
           let box = event.currentTarget.getBoundingClientRect()
           rotateY.set(((event.clientX - box.left) / box.width - 0.5) * maxTilt)
           rotateX.set(-((event.clientY - box.top) / box.height - 0.5) * maxTilt)

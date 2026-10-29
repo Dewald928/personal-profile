@@ -19,6 +19,12 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
+
+  /* Tailwind CSS v4 no longer gives buttons a pointer cursor; keep the v3 behaviour */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 /* Interactive effects. Only visible with a mouse; see components/Interactions.tsx */

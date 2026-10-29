@@ -41,8 +41,23 @@ export function Interactions() {
     // no glow until the cursor has actually been seen
     let pointer: { x: number; y: number } | null = null
 
+    function clearGlow() {
+      for (let el of document.querySelectorAll<HTMLElement>('[data-glow]')) {
+        el.style.removeProperty('--mx')
+        el.style.removeProperty('--my')
+      }
+    }
+
     function draw() {
       frame = 0
+
+      // Read every rect before writing any style, so the browser lays out once per frame.
+      // ponytail: reads every [data-glow] rect per frame, fine for a page of cards; delegate to the hovered card if a page ever has hundreds
+      let glows = pointer
+        ? [...document.querySelectorAll<HTMLElement>('[data-glow]')]
+        : []
+      let rects = glows.map((el) => el.getBoundingClientRect())
+
       let spot = spotRef.current
       if (spot) {
         spot.style.transform = `translate(${x.get()}px, ${y.get()}px)`
@@ -51,11 +66,6 @@ export function Interactions() {
 
       if (!pointer) return
       let { x: px, y: py } = pointer
-
-      // Read every rect before writing any style, so the browser lays out once per frame.
-      // ponytail: reads every [data-glow] rect per frame, fine for a page of cards; delegate to the hovered card if a page ever has hundreds
-      let glows = [...document.querySelectorAll<HTMLElement>('[data-glow]')]
-      let rects = glows.map((el) => el.getBoundingClientRect())
       glows.forEach((el, i) => {
         // offsetWidth / rect.width undoes any scale transform, giving element-local coordinates
         let scale = el.offsetWidth / rects[i].width || 1
@@ -69,6 +79,8 @@ export function Interactions() {
     }
 
     function onMove(event: PointerEvent) {
+      // a touchscreen on a mouse-equipped laptop fires these too; follow the mouse only
+      if (event.pointerType !== 'mouse') return
       pointer = { x: event.clientX, y: event.clientY }
       if (!visible) {
         x.jump(event.clientX)
@@ -83,6 +95,9 @@ export function Interactions() {
 
     function onLeave() {
       visible = false
+      // no cursor, no glow: an always-visible glow border would otherwise stay lit
+      pointer = null
+      clearGlow()
       opacity.set(0)
     }
 
@@ -102,10 +117,7 @@ export function Interactions() {
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
       // effects switched off: drop the glow so no card stays lit at the old spot
-      for (let el of document.querySelectorAll<HTMLElement>('[data-glow]')) {
-        el.style.removeProperty('--mx')
-        el.style.removeProperty('--my')
-      }
+      clearGlow()
       document.documentElement.removeEventListener('pointerleave', onLeave)
     }
   }, [interactive, x, y, opacity])
