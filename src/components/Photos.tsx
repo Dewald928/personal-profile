@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Image, { type StaticImageData } from 'next/image'
 import { motion, useSpring } from 'motion/react'
 import clsx from 'clsx'
@@ -29,6 +29,8 @@ function Photo({
   interactive: boolean
 }) {
   let ref = useRef<HTMLDivElement>(null)
+  // stay on top until the snap-back finishes, not just while held
+  let [lifted, setLifted] = useState(false)
   let x = useSpring(0, lean)
   let y = useSpring(0, lean)
   let r = useSpring(rotate, lean)
@@ -71,7 +73,9 @@ function Photo({
         bounceStiffness: lean.stiffness,
         bounceDamping: lean.damping,
       }}
-      whileDrag={{ zIndex: 10 }}
+      onDragStart={() => setLifted(true)}
+      onDragTransitionEnd={() => setLifted(false)}
+      style={{ zIndex: lifted ? 10 : undefined }}
       className={clsx(
         'relative aspect-9/10 w-44 flex-none sm:w-72',
         interactive && 'cursor-grab active:cursor-grabbing',

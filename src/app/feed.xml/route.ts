@@ -32,8 +32,12 @@ export async function GET(req: Request) {
   let articleIds = (await getAllArticles()).map((article) => article.slug)
   assert(articleIds.length > 0, 'No articles found for the feed')
 
+  // Scrape our own pages only: a spoofed Host header must not choose the origin.
+  let trusted = ['localhost', '127.0.0.1', new URL(siteUrl).hostname]
+  let origin = trusted.includes(new URL(req.url).hostname) ? req.url : siteUrl
+
   for (let id of articleIds) {
-    let url = String(new URL(`/articles/${id}`, req.url))
+    let url = String(new URL(`/articles/${id}`, origin))
     let res = await fetch(url)
     assert(res.ok, `Fetching ${url} for the feed failed with ${res.status}`)
     let html = await res.text()

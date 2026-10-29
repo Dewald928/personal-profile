@@ -86,11 +86,16 @@ export function Interactions() {
       value.on('change', schedule),
     )
     window.addEventListener('pointermove', onMove, { passive: true })
+    // cards move under a still cursor when scrolling, so re-aim the glow
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule, { passive: true })
     document.documentElement.addEventListener('pointerleave', onLeave)
     return () => {
       cancelAnimationFrame(frame)
       unsubscribe.forEach((off) => off())
       window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
       document.documentElement.removeEventListener('pointerleave', onLeave)
     }
   }, [interactive, x, y, opacity])
