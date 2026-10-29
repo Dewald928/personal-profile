@@ -3,6 +3,10 @@ import nextMDX from '@next/mdx'
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
+  // The feed lists articles from disk at request time; ship them with the function
+  outputFileTracingIncludes: {
+    '/feed.xml': ['./src/app/articles/*/page.mdx'],
+  },
 }
 
 const withMDX = nextMDX({

@@ -1,12 +1,15 @@
 'use client'
 
-import { useEffect, useSyncExternalStore } from 'react'
-import { motion, useSpring } from 'motion/react'
+import { useEffect, useRef, useSyncExternalStore } from 'react'
+import { useSpring } from 'motion/react'
 
 // Effects only run with a real mouse and no reduced-motion request.
 // Touch screens and reduced motion get the plain, static site.
+// Keep in sync with the settle-in utility in styles/tailwind.css.
 const INTERACTIVE_QUERY =
   '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
+
+const follow = { stiffness: 60, damping: 14 }
 
 function subscribe(onChange: () => void) {
   let media = window.matchMedia(INTERACTIVE_QUERY)
@@ -24,37 +27,69 @@ export function useInteractive() {
 
 export function Interactions() {
   let interactive = useInteractive()
-  let x = useSpring(0, { stiffness: 60, damping: 14 })
-  let y = useSpring(0, { stiffness: 60, damping: 14 })
+  let spotRef = useRef<HTMLDivElement>(null)
+  let x = useSpring(0, follow)
+  let y = useSpring(0, follow)
   let opacity = useSpring(0, { stiffness: 60, damping: 20 })
 
   useEffect(() => {
     if (!interactive) return
 
-    function onMove(event: PointerEvent) {
-      if (opacity.get() === 0) {
-        x.jump(event.clientX)
-        y.jump(event.clientY)
-      }
-      x.set(event.clientX)
-      y.set(event.clientY)
-      opacity.set(1)
+    let visible = false
+    let frame = 0
+    let pointer = { x: 0, y: 0 }
 
-      // ponytail: reads every [data-glow] rect per move, fine for a page of cards; delegate to the hovered card if a page ever has hundreds
-      for (let el of document.querySelectorAll<HTMLElement>('[data-glow]')) {
-        let rect = el.getBoundingClientRect()
-        el.style.setProperty('--mx', `${event.clientX - rect.left}px`)
-        el.style.setProperty('--my', `${event.clientY - rect.top}px`)
+    function draw() {
+      frame = 0
+      let spot = spotRef.current
+      if (spot) {
+        spot.style.transform = `translate(${x.get()}px, ${y.get()}px)`
+        spot.style.opacity = String(opacity.get())
       }
+
+      // Read every rect before writing any style, so the browser lays out once per frame.
+      // ponytail: reads every [data-glow] rect per frame, fine for a page of cards; delegate to the hovered card if a page ever has hundreds
+      let glows = [...document.querySelectorAll<HTMLElement>('[data-glow]')]
+      let rects = glows.map((el) => el.getBoundingClientRect())
+      glows.forEach((el, i) => {
+        // offsetWidth / rect.width undoes any scale transform, giving element-local coordinates
+        let scale = el.offsetWidth / rects[i].width || 1
+        el.style.setProperty('--mx', `${(pointer.x - rects[i].left) * scale}px`)
+        el.style.setProperty('--my', `${(pointer.y - rects[i].top) * scale}px`)
+      })
+    }
+
+    function schedule() {
+      frame ||= requestAnimationFrame(draw)
+    }
+
+    function onMove(event: PointerEvent) {
+      pointer = { x: event.clientX, y: event.clientY }
+      if (!visible) {
+        x.jump(pointer.x)
+        y.jump(pointer.y)
+        visible = true
+      }
+      x.set(pointer.x)
+      y.set(pointer.y)
+      opacity.set(1)
+      schedule()
     }
 
     function onLeave() {
+      visible = false
       opacity.set(0)
     }
 
-    window.addEventListener('pointermove', onMove)
+    // springs keep animating after the pointer stops, so redraw on every change
+    let unsubscribe = [x, y, opacity].map((value) =>
+      value.on('change', schedule),
+    )
+    window.addEventListener('pointermove', onMove, { passive: true })
     document.documentElement.addEventListener('pointerleave', onLeave)
     return () => {
+      cancelAnimationFrame(frame)
+      unsubscribe.forEach((off) => off())
       window.removeEventListener('pointermove', onMove)
       document.documentElement.removeEventListener('pointerleave', onLeave)
     }
@@ -65,10 +100,10 @@ export function Interactions() {
   }
 
   return (
-    <motion.div
+    <div
+      ref={spotRef}
       aria-hidden="true"
-      className="pointer-events-none fixed top-0 left-0 -mt-[350px] -ml-[350px] size-[700px] rounded-full spotlight"
-      style={{ x, y, opacity }}
+      className="pointer-events-none fixed top-0 left-0 -mt-[350px] -ml-[350px] size-[700px] rounded-full spotlight opacity-0"
     />
   )
 }

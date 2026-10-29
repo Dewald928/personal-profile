@@ -9,6 +9,15 @@ import { useInteractive } from '@/components/Interactions'
 
 const lean = { stiffness: 170, damping: 14 }
 const tilt = { stiffness: 200, damping: 20 }
+const rotations = [2, -2, 2, 2, -2]
+
+// Tuning: how far the cursor's pull reaches (px), how strongly photos follow it,
+// and the maximum hover tilt (degrees).
+const leanReach = 500
+const leanX = 0.025
+const leanY = 0.02
+const leanTurn = 0.004
+const maxTilt = 14
 
 function Photo({
   image,
@@ -35,22 +44,33 @@ function Photo({
       let box = ref.current!.getBoundingClientRect()
       let dx = event.clientX - (box.left + box.width / 2)
       let dy = event.clientY - (box.top + box.height / 2)
-      let falloff = Math.exp(-Math.hypot(dx, dy) / 500)
-      x.set(dx * 0.025 * falloff)
-      y.set(dy * 0.02 * falloff)
-      r.set(rotate + dx * 0.004 * falloff)
+      let falloff = Math.exp(-Math.hypot(dx, dy) / leanReach)
+      x.set(dx * leanX * falloff)
+      y.set(dy * leanY * falloff)
+      r.set(rotate + dx * leanTurn * falloff)
     }
 
-    window.addEventListener('pointermove', onMove)
-    return () => window.removeEventListener('pointermove', onMove)
-  }, [interactive, rotate, x, y, r])
+    window.addEventListener('pointermove', onMove, { passive: true })
+    return () => {
+      window.removeEventListener('pointermove', onMove)
+      // settle back if effects switch off mid-session (e.g. reduced motion turned on)
+      x.set(0)
+      y.set(0)
+      r.set(rotate)
+      rotateX.set(0)
+      rotateY.set(0)
+    }
+  }, [interactive, rotate, x, y, r, rotateX, rotateY])
 
   return (
     <motion.div
       ref={ref}
       drag={interactive}
       dragSnapToOrigin
-      dragTransition={{ bounceStiffness: 170, bounceDamping: 14 }}
+      dragTransition={{
+        bounceStiffness: lean.stiffness,
+        bounceDamping: lean.damping,
+      }}
       whileDrag={{ zIndex: 10 }}
       className={clsx(
         'relative aspect-9/10 w-44 flex-none sm:w-72',
@@ -64,8 +84,8 @@ function Photo({
         onPointerMove={(event) => {
           if (!interactive) return
           let box = event.currentTarget.getBoundingClientRect()
-          rotateY.set(((event.clientX - box.left) / box.width - 0.5) * 14)
-          rotateX.set(-((event.clientY - box.top) / box.height - 0.5) * 14)
+          rotateY.set(((event.clientX - box.left) / box.width - 0.5) * maxTilt)
+          rotateX.set(-((event.clientY - box.top) / box.height - 0.5) * maxTilt)
         }}
         onPointerLeave={() => {
           rotateX.set(0)
@@ -86,11 +106,11 @@ function Photo({
 
 export function Photos({ images }: { images: Array<StaticImageData> }) {
   let interactive = useInteractive()
-  let rotations = [2, -2, 2, 2, -2]
 
   return (
     <div className="mt-16 sm:mt-20">
-      <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
+      {/* clip only sideways, so a dragged photo can move up and down freely */}
+      <div className="-my-4 flex justify-center gap-5 overflow-x-clip py-4 sm:gap-8">
         {images.map((image, imageIndex) => (
           <Photo
             key={image.src}

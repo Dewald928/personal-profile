@@ -1,7 +1,8 @@
 import assert from 'assert'
 import * as cheerio from 'cheerio'
-import glob from 'fast-glob'
 import { Feed } from 'feed'
+
+import { getAllArticles } from '@/lib/articles'
 
 export async function GET(req: Request) {
   let siteUrl = process.env.NEXT_PUBLIC_SITE_URL
@@ -10,14 +11,12 @@ export async function GET(req: Request) {
     throw Error('Missing NEXT_PUBLIC_SITE_URL environment variable')
   }
 
-  let author = {
-    name: 'Dewald Krynauw',
-    email: 'spencer@planetaria.tech',
-  }
+  let author = { name: 'Dewald Krynauw' }
 
   let feed = new Feed({
     title: author.name,
-    description: 'Your blog description',
+    description:
+      'Software engineer based in South Africa and Chief Information Officer of Yknot. Building real-world solutions for real-world problems.',
     author,
     id: siteUrl,
     link: siteUrl,
@@ -29,13 +28,15 @@ export async function GET(req: Request) {
     },
   })
 
-  let articleIds = (
-    await glob('*/page.mdx', { cwd: './src/app/articles' })
-  ).map((file) => file.replace(/\/page\.mdx$/, ''))
+  // Newest first. Never cache an empty feed: it would stick at the CDN for a year.
+  let articleIds = (await getAllArticles()).map((article) => article.slug)
+  assert(articleIds.length > 0, 'No articles found for the feed')
 
   for (let id of articleIds) {
     let url = String(new URL(`/articles/${id}`, req.url))
-    let html = await (await fetch(url)).text()
+    let res = await fetch(url)
+    assert(res.ok, `Fetching ${url} for the feed failed with ${res.status}`)
+    let html = await res.text()
     let $ = cheerio.load(html)
 
     let publicUrl = `${siteUrl}/articles/${id}`

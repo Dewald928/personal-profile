@@ -79,9 +79,10 @@
   }
 }
 
-/* Drift up into place on scroll, using native scroll-driven animations */
+/* Drift up into place on scroll, using native scroll-driven animations.
+   The media query matches INTERACTIVE_QUERY in components/Interactions.tsx; screen-only so print shows everything. */
 @utility settle-in {
-  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  @media screen and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
       animation: settle-in cubic-bezier(0.2, 0.7, 0.2, 1) both;
       animation-timeline: view();
