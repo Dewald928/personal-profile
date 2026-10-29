@@ -32,9 +32,9 @@ export async function GET(req: Request) {
   let articleIds = (await getAllArticles()).map((article) => article.slug)
   assert(articleIds.length > 0, 'No articles found for the feed')
 
-  // Scrape our own pages only: a spoofed Host header must not choose the origin.
-  let trusted = ['localhost', '127.0.0.1', new URL(siteUrl).hostname]
-  let origin = trusted.includes(new URL(req.url).hostname) ? req.url : siteUrl
+  // Never derive the fetch target from request headers (a spoofed Host could aim it
+  // at any local port). Only `next dev` scrapes itself; everything else uses siteUrl.
+  let origin = process.env.NODE_ENV === 'development' ? req.url : siteUrl
 
   for (let id of articleIds) {
     let url = String(new URL(`/articles/${id}`, origin))

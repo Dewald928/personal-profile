@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image, { type StaticImageData } from 'next/image'
-import { motion, useSpring } from 'motion/react'
+import { motion, useDragControls, useSpring } from 'motion/react'
 import clsx from 'clsx'
 
 import { useInteractive } from '@/components/Interactions'
@@ -31,6 +31,7 @@ function Photo({
   let ref = useRef<HTMLDivElement>(null)
   // stay on top until the snap-back finishes, not just while held
   let [lifted, setLifted] = useState(false)
+  let drag = useDragControls()
   let x = useSpring(0, lean)
   let y = useSpring(0, lean)
   let r = useSpring(rotate, lean)
@@ -67,7 +68,14 @@ function Photo({
   return (
     <motion.div
       ref={ref}
+      // Mouse-only drag: motion's own listener would block touch scrolling over the
+      // strip on touchscreen laptops, where the primary pointer is still a mouse.
       drag={interactive}
+      dragListener={false}
+      dragControls={drag}
+      onPointerDown={(event) => {
+        if (interactive && event.pointerType === 'mouse') drag.start(event)
+      }}
       dragSnapToOrigin
       dragTransition={{
         bounceStiffness: lean.stiffness,
@@ -75,7 +83,7 @@ function Photo({
       }}
       onDragStart={() => setLifted(true)}
       onDragTransitionEnd={() => setLifted(false)}
-      style={{ zIndex: lifted ? 10 : undefined }}
+      style={{ zIndex: lifted && interactive ? 10 : undefined }}
       className={clsx(
         'relative aspect-9/10 w-44 flex-none sm:w-72',
         interactive && 'cursor-grab active:cursor-grabbing',
